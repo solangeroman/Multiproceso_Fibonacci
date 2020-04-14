@@ -34,12 +34,6 @@ def par_fib(n): # f() que prepara el reparto de trabajo para la mult. en paralel
     for core in cores:
         core.join()# Bloqueo cualquier llamada hasta que terminen su trabajo todos los cores
 
-#    C_2D = [[0] for k in range(n)]  # Convierto el array unidimensional MC en una matrix 2D (C_2D) 
-#    for i in range(n):# i para iterar sobre las filas de n
-#        for j in range(n):# j para iterar sobre las columnas de n
-#            C_2D[i][j] = MC[i*n + j] # Guardo el C_2D los datos del array MC
-#    return C_2D
-
 def par_core(n, MC, i_MC, f_MC): # La tarea que hacen todos los cores
     for i in range(i_MC, f_MC): # Size representado en colores en el excel que itera sobre las filas en A
         for k in range(n): # Size representado en colores en el excel que itera sobre las  en n
