@@ -18,7 +18,7 @@ def sec_fib(n): # f() que calcula la mult. en secuencial, pero NO de manera recu
 def par_fib(n): # f() que prepara el reparto de trabajo para la mult. en paralelo
     
     n_cores = mp.cpu_count() # Obtengo los cores de mi pc
-    size_fib = math.ceil( n /n_cores) # Columnas  a procesar x c/cpre, ver Excel adjunto
+    size_fib = math.ceil( n /n_cores) # Fibonacci a procesar 
     
     print("Numero de cores que tiene el pc: ", n_cores)
     
@@ -26,7 +26,7 @@ def par_fib(n): # f() que prepara el reparto de trabajo para la mult. en paralel
     MC = mp.RawArray('i', n) # Array MC de memoria compartida donde se almacenaran los resultados
     cores = [] # Array para guardar los cores y su trabajo
     for core in range(n_cores):# Asigno a cada core el trabajo que le toca
-        i_MC = min(core * size_fib, n) # Calculo i para marcar inicio del trabajo del core en relacion a las filas
+        i_MC = min(core * size_fib, n) # Calculo i para marcar inicio del trabajo del core 
         f_MC = min((core + 1) * size_fib, n) # Calculo f para marcar fin del trabajo del core
         cores.append(mp.Process(target=par_core, args=(n, MC, i_MC, f_MC)))# Añado al Array los cores y su trabajo
     for core in cores:
@@ -35,11 +35,11 @@ def par_fib(n): # f() que prepara el reparto de trabajo para la mult. en paralel
         core.join()# Bloqueo cualquier llamada hasta que terminen su trabajo todos los cores
 
 def par_core(n, MC, i_MC, f_MC): # La tarea que hacen todos los cores
-    for i in range(i_MC, f_MC): # Size representado en colores en el excel que itera sobre las filas en A
-        for k in range(n): # Size representado en colores en el excel que itera sobre las  en n
-               #MC[i*n] += n # Guarda resultado en MC[] de cada core
+    for i in range(i_MC, f_MC): 
+        for k in range(n): 
+               #MC[i*n] += n 
                #MC[i] = sec_fib(i)
-              MC[i] += n
+              MC[i] += n # Guarda resultado en MC[] de cada core
 
 
 if __name__ == '__main__':
